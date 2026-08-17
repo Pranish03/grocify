@@ -1,9 +1,12 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
       <Text>Edit src/app/index.tsx to edit this screen.</Text>
+      <Pressable>
+        <Text>Press</Text>
+      </Pressable>
     </View>
   );
 }
