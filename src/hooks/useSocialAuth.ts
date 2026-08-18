@@ -7,7 +7,7 @@ const useSocialAuth = () => {
   const { startSSOFlow } = useSSO();
 
   const handleSocialAuth = async (
-    strategy: "oauth_google" | "oauth_github" | "oauth_apple",
+    strategy: "oauth_google" | "oauth_github",
   ) => {
     if (loadingStrategy) return;
 
