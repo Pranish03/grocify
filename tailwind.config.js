@@ -6,6 +6,9 @@ module.exports = {
   darkMode: "media", // this tells Tailwind/NativeWind to follow the device color scheme.
   theme: {
     extend: {
+      fontFamily: {
+        mono: ["monospace"],
+      },
       colors: {
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
