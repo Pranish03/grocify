@@ -52,7 +52,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "db:push": "drizzle-kit push --config drizzle.config.ts"
+    "db:push": "drizzle-kit push --config drizzle.config.ts",
+    "db:seed": "node ./scripts/seed-grocery.cjs"
   },
   "private": true
 }
