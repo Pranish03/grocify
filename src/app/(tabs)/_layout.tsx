@@ -1,9 +1,17 @@
+import { useGroceryStore } from "@/store/grocery-store";
 import { useAuth } from "@clerk/expo";
 import { Redirect } from "expo-router";
 import { NativeTabs } from "expo-router/build/native-tabs";
+import { useEffect } from "react";
 
 export default function TabsLayout() {
   const { isSignedIn, isLoaded } = useAuth();
+
+  const { loadItems, items } = useGroceryStore();
+
+  useEffect(() => {
+    loadItems();
+  }, []);
 
   if (!isLoaded) {
     return null;
