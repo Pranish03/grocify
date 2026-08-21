@@ -17,38 +17,25 @@ const cardShadow = {
 type StatCardProps = {
   icon: React.ComponentProps<typeof FontAwesome6>["name"];
   iconBg: string;
-  iconColor: string;
   label: string;
-  labelColor?: string;
   value: number;
 };
 
-const StatCard = ({
-  icon,
-  iconBg,
-  iconColor,
-  label,
-  labelColor = "text-green-700/70",
-  value,
-}: StatCardProps) => (
+const StatCard = ({ icon, iconBg, label, value }: StatCardProps) => (
   <View
-    className="flex-1 rounded-2xl border border-green-800/10 bg-white p-3.5"
+    className="flex-1 rounded-3xl border border-green-800/10 bg-white p-4"
     style={cardShadow}
   >
     <View
-      className="h-7 w-7 items-center justify-center rounded-full"
+      className="h-8 w-8 items-center justify-center rounded-xl"
       style={{ backgroundColor: iconBg }}
     >
-      <FontAwesome6 name={icon} size={11} color={iconColor} />
+      <FontAwesome6 name={icon} size={16} color="#fff" />
     </View>
-    <Text
-      className={`mt-2 text-[11px] font-semibold uppercase tracking-[1px] ${labelColor}`}
-    >
+    <Text className="mt-3 text-xs uppercase tracking-[1px] text-green-700/60">
       {label}
     </Text>
-    <Text className="mt-0.5 text-2xl font-extrabold text-green-900">
-      {value}
-    </Text>
+    <Text className="mt-1 text-3xl font-extrabold text-green-900">{value}</Text>
   </View>
 );
 
@@ -64,14 +51,13 @@ const PlannerScreen = () => {
     .reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <View className="bg-green-50 pt-6 flex-1">
+    <View className="flex-1 bg-green-50 pt-10">
       <TabScreenBackground />
 
       <KeyboardAwareScrollView
         bottomOffset={80}
         contentContainerStyle={{ padding: 20, gap: 14 }}
         showsVerticalScrollIndicator={false}
-        className="flex-1 bg-background py-4"
         contentInsetAdjustmentBehavior="automatic"
         keyboardShouldPersistTaps="handled"
       >
@@ -109,34 +95,25 @@ const PlannerScreen = () => {
           </View>
         </View>
 
-        <View>
-          <Text className="mb-2 ml-1 text-xs font-semibold uppercase tracking-[1px] text-green-800/50">
-            Overview
-          </Text>
-          <View className="flex-row gap-3">
-            <StatCard
-              icon="clipboard-list"
-              iconBg="#dcfce7"
-              iconColor="#166534"
-              label="Pending"
-              value={pendingCount}
-            />
-            <StatCard
-              icon="bolt"
-              iconBg="#fee2e2"
-              iconColor="#dc2626"
-              label="High"
-              labelColor="text-red-500/80"
-              value={highPriorityCount}
-            />
-            <StatCard
-              icon="layer-group"
-              iconBg="#dcfce7"
-              iconColor="#166534"
-              label="Units"
-              value={totalQuantity}
-            />
-          </View>
+        <View className="flex-row gap-3">
+          <StatCard
+            icon="clipboard-list"
+            iconBg="#f59e0b"
+            label="Pending"
+            value={pendingCount}
+          />
+          <StatCard
+            icon="bolt"
+            iconBg="#dc2626"
+            label="High"
+            value={highPriorityCount}
+          />
+          <StatCard
+            icon="layer-group"
+            iconBg="#166534"
+            label="Units"
+            value={totalQuantity}
+          />
         </View>
 
         <PlannerHeroImage />

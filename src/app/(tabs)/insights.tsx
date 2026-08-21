@@ -5,19 +5,18 @@ import InsightsStatsSection from "@/components/insights/InsightsStatsSection";
 import SentryFeedbackButton from "@/components/insights/SentryFeedbackButton";
 import UserProfile from "@/components/insights/UserProfile";
 import TabScreenBackground from "@/components/TabScreenBackground";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 
 const InsightsScreen = () => {
   return (
-    <>
+    <View className="flex-1 bg-green-50 pt-10">
+      <TabScreenBackground />
+
       <ScrollView
-        className="flex-1 bg-green-50"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 20, paddingTop: 48, gap: 14 }}
+        contentContainerStyle={{ padding: 20, gap: 14 }}
         contentInsetAdjustmentBehavior="automatic"
       >
-        <TabScreenBackground />
-
         <UserProfile />
         <InsightsStatsSection />
         <InsightsCategorySection />
@@ -26,7 +25,7 @@ const InsightsScreen = () => {
       </ScrollView>
 
       <SentryFeedbackButton />
-    </>
+    </View>
   );
 };
 
