@@ -29,7 +29,7 @@ export default function ListScreen() {
         </Text>
       </View>
 
-      <View className="mb-20">
+      <View className="mb-[64px]">
         {pendingItems.length ? (
           pendingItems.map((item) => (
             <PendingItemCard key={item.id} item={item} />
