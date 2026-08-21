@@ -34,14 +34,14 @@ export default function SignInScreen() {
         </View>
       </View>
 
-      <View className="mt-8 flex-1 rounded-t-[36px] bg-green-900 px-6 pb-8 pt-6">
-        <View className="self-center rounded-full bg-green-800 px-3 py-1">
-          <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-100/70">
+      <View className="mt-8 flex-1 rounded-t-[36px] bg-green-50 px-6 pb-8 pt-6">
+        <View className="self-center rounded-full bg-green-200 px-3 py-1">
+          <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-900">
             Welcome Back
           </Text>
         </View>
 
-        <Text className="mt-2 text-sm text-center leading-6 text-green-100/70">
+        <Text className="mt-2 text-sm text-center leading-6 text-green-800">
           Choose a social provider and jump right into your personalized grocery
           experience
         </Text>
@@ -49,55 +49,47 @@ export default function SignInScreen() {
         <View className="mt-6">
           <Pressable
             className={`
-              mb-3 h-14 flex-row items-center rounded-2xl border border-green-100/30 bg-green-900 px-4 active:opacity-90 
+              mb-3 h-14 flex-row items-center rounded-2xl border border-green-800/50 bg-green-50 px-4 active:opacity-90 
               ${isLoading ? "opacity-70" : ""} 
             `}
             disabled={isLoading}
             onPress={() => handleSocialAuth("oauth_google")}
           >
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-white">
+            <View className="h-8 w-8 items-center justify-center rounded-full bg-green-50">
               <Image
                 source={require("../../../assets/images/google.png")}
                 className="h-[20px] w-[20px]"
               />
             </View>
-            <Text className="ml-3 flex-1 text-lg font-semibold text-green-100">
+            <Text className="ml-3 flex-1 text-lg font-semibold text-green-900">
               {isGoogleClicked
                 ? "Connecting Google..."
                 : "Continue with Google"}
             </Text>
-            <FontAwesome
-              name="angle-right"
-              size={18}
-              color="rgba(255, 255, 255, 0.3)"
-            />
+            <FontAwesome name="angle-right" size={18} color="#14532d" />
           </Pressable>
 
           <Pressable
             className={`
-              mb-3 h-14 flex-row items-center rounded-2xl border border-green-100/30 bg-green-900 px-4 active:opacity-90 
+              mb-3 h-14 flex-row items-center rounded-2xl border border-green-800/50 bg-green-50 px-4 active:opacity-90 
               ${isLoading ? "opacity-70" : ""} 
             `}
             disabled={isLoading}
             onPress={() => handleSocialAuth("oauth_github")}
           >
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-white">
+            <View className="h-8 w-8 items-center justify-center rounded-full bg-green-50">
               <FontAwesome name="github" size={24} color="#111" />
             </View>
-            <Text className="ml-3 flex-1 text-lg font-semibold text-green-100">
+            <Text className="ml-3 flex-1 text-lg font-semibold text-green-900">
               {isGithubClicked
                 ? "Connecting GitHub..."
                 : "Continue with GitHub"}
             </Text>
-            <FontAwesome
-              name="angle-right"
-              size={18}
-              color="rgba(255, 255, 255, 0.3)"
-            />
+            <FontAwesome name="angle-right" size={18} color="#14532d" />
           </Pressable>
         </View>
 
-        <Text className="mt-3 text-center text-sm text-green-100/70">
+        <Text className="mt-3 text-center text-sm text-green-800">
           By continuing, you agree to our Terms and Privacy Policy.
         </Text>
       </View>
