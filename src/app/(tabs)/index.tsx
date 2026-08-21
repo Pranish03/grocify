@@ -11,10 +11,7 @@ export default function ListScreen() {
   const pendingItems = items.filter((item) => !item.purchased);
 
   return (
-    <ScrollView
-      className="flex-1 bg-green-50 p-[20px] pt-14"
-      showsVerticalScrollIndicator={false}
-    >
+    <ScrollView className="flex-1 bg-green-50 p-[20px] pt-12">
       <TabScreenBackground />
 
       <ListHeroCard />
