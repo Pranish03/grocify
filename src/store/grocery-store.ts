@@ -9,6 +9,7 @@ export type GroceryItem = {
   id: string;
   name: string;
   category: GroceryCategory;
+  quantity: number;
   purchased: boolean;
   priority: GroceryPriority;
 };
@@ -16,7 +17,7 @@ export type GroceryItem = {
 export type CreateItemInput = {
   name: string;
   category: GroceryCategory;
-  purchased: boolean;
+  quantity: number;
   priority: GroceryPriority;
 };
 
@@ -57,13 +58,54 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
     }
   },
 
-  addItem: async () => {
+  addItem: async (input) => {
+    set({ error: null });
     try {
-    } catch (error) {}
+      const res = await fetch("/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: input.name,
+          category: input.category,
+          quantity: Math.max(1, input.quantity),
+          priority: input.priority,
+        }),
+      });
+      const payload = (await res.json()) as ItemResponse;
+
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+
+      set((state) => ({ items: [payload.item, ...state.items] }));
+      return payload.item;
+    } catch (error) {
+      console.error("Error adding item:", error);
+      set({ error: "Something went wrong" });
+    }
   },
-  updateQuantity: async () => {
+
+  updateQuantity: async (id, quantity) => {
+    const nextQuantity = Math.max(1, quantity);
+    set({ error: null });
+
     try {
-    } catch (error) {}
+      const res = await fetch(`/api/items/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantity: nextQuantity }),
+      });
+      const payload = (await res.json()) as ItemResponse;
+
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+
+      set((state) => ({
+        items: state.items.map((item) =>
+          item.id === id ? payload.item : item,
+        ),
+      }));
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+      set({ error: "Something went wrong" });
+    }
   },
   togglePurchased: async () => {
     try {
