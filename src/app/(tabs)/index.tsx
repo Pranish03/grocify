@@ -1,11 +1,13 @@
 import ListHeroCard from "@/components/list/ListHeroCard";
+import PendingItemCard from "@/components/list/PendingItemCard";
 import TabScreenBackground from "@/components/TabScreenBackground";
-import { useClerk, useUser } from "@clerk/expo";
-import { ScrollView } from "react-native";
+import { useGroceryStore } from "@/store/grocery-store";
+import { ScrollView, Text, View } from "react-native";
 
 export default function ListScreen() {
-  const { user } = useUser();
-  const { signOut } = useClerk();
+  const { items } = useGroceryStore();
+
+  const pendingItems = items.filter((item) => !item.purchased);
 
   return (
     <ScrollView
@@ -13,7 +15,21 @@ export default function ListScreen() {
       showsVerticalScrollIndicator={false}
     >
       <TabScreenBackground />
+
       <ListHeroCard />
+
+      <View className="flex-row items-center justify-between px-1 mt-4 mb-2">
+        <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
+          Shopping items
+        </Text>
+        <Text className="text-sm text-green-800">
+          {pendingItems.length} active
+        </Text>
+      </View>
+
+      {pendingItems.map((item) => (
+        <PendingItemCard key={item.id} item={item} />
+      ))}
     </ScrollView>
   );
 }
