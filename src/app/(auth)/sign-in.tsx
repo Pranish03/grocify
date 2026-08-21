@@ -83,7 +83,7 @@ export default function SignInScreen() {
             disabled={isLoading}
             onPress={() => handleSocialAuth("oauth_google")}
           >
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-green-50">
+            <View>
               {isGoogleClicked ? (
                 <ActivityIndicator size="small" color="#14532d" />
               ) : (
@@ -115,7 +115,7 @@ export default function SignInScreen() {
             disabled={isLoading}
             onPress={() => handleSocialAuth("oauth_github")}
           >
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-green-50">
+            <View>
               {isGithubClicked ? (
                 <ActivityIndicator size="small" color="#14532d" />
               ) : (

@@ -3,8 +3,7 @@ import ListHeroCard from "@/components/list/ListHeroCard";
 import PendingItemCard from "@/components/list/PendingItemCard";
 import TabScreenBackground from "@/components/TabScreenBackground";
 import { useGroceryStore } from "@/store/grocery-store";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 
 export default function ListScreen() {
   const { items } = useGroceryStore();
@@ -12,7 +11,35 @@ export default function ListScreen() {
   const pendingItems = items.filter((item) => !item.purchased);
 
   return (
-    <ScrollView
+    <View className="bg-green-50 pt-10">
+      <TabScreenBackground />
+
+      <FlatList
+        contentContainerStyle={{ padding: 20, gap: 14 }}
+        data={pendingItems}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <PendingItemCard item={item} />}
+        ListHeaderComponent={
+          <View>
+            <ListHeroCard />
+
+            <View className="flex-row items-center justify-between px-1 mt-4">
+              <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
+                Shopping items
+              </Text>
+              <Text className="text-sm font-medium text-green-700">
+                {pendingItems.length} active
+              </Text>
+            </View>
+          </View>
+        }
+        ListFooterComponent={<CompletedItems />}
+      />
+    </View>
+  );
+}
+
+/* <ScrollView
       className="flex-1 bg-green-50 p-[20px] pt-12"
       showsVerticalScrollIndicator={false}
     >
@@ -50,6 +77,4 @@ export default function ListScreen() {
 
         <CompletedItems />
       </View>
-    </ScrollView>
-  );
-}
+    </ScrollView> */

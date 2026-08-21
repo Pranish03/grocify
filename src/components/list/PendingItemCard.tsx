@@ -19,7 +19,7 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
 
   return (
     <View
-      className="rounded-3xl border border-green-800/10 bg-white p-4 my-2"
+      className="rounded-3xl border border-green-800/10 bg-white p-4"
       style={{
         shadowColor: "#14532d",
         shadowOpacity: 0.06,

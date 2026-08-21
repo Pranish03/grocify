@@ -9,7 +9,7 @@ const CompletedItems = () => {
   if (!completedItems.length) return null;
 
   return (
-    <View className="mt-3 rounded-3xl border border-green-800/10 bg-green-100/60 p-4">
+    <View className="rounded-3xl border border-green-800/10 bg-green-100/60 p-4">
       <View className="flex-row items-center justify-between">
         <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
           Completed
