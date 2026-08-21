@@ -23,12 +23,12 @@ export default function TabsLayout() {
 
   return (
     <NativeTabs
-      tintColor={"#38DC74"}
-      backgroundColor={"#212121"}
-      indicatorColor={"#26382D"}
-      rippleColor={"#26382D"}
-      iconColor={"#A1A1AA"}
-      labelStyle={{ color: "#A1A1AA" }}
+      tintColor={"#16a34a"}
+      backgroundColor={"#f0fdf4"}
+      indicatorColor={"rgb(2 44 34 / 0.05)"}
+      rippleColor={"rgb(2 44 34 / 0.05)"}
+      iconColor={"#404040"}
+      labelStyle={{ color: "#404040" }}
     >
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>List</NativeTabs.Trigger.Label>

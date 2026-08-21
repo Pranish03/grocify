@@ -1,20 +1,19 @@
-import { Show, useClerk, useUser } from "@clerk/expo";
-import { Pressable, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import ListHeroCard from "@/components/list/ListHeroCard";
+import TabScreenBackground from "@/components/TabScreenBackground";
+import { useClerk, useUser } from "@clerk/expo";
+import { ScrollView } from "react-native";
 
-export default function HomeScreen() {
+export default function ListScreen() {
   const { user } = useUser();
   const { signOut } = useClerk();
-  return (
-    <SafeAreaView>
-      <Text>Welcome!</Text>
 
-      <Show when="signed-in">
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-        <Pressable onPress={() => signOut()}>
-          <Text>Sign out</Text>
-        </Pressable>
-      </Show>
-    </SafeAreaView>
+  return (
+    <ScrollView
+      className="flex-1 bg-green-50 p-[20px] pt-14"
+      showsVerticalScrollIndicator={false}
+    >
+      <TabScreenBackground />
+      <ListHeroCard />
+    </ScrollView>
   );
 }

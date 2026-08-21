@@ -51,7 +51,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
       set({ items: payload.items });
     } catch (error) {
-      console.log("Error loading items: ", error);
+      console.error("Error loading items: ", error);
       set({ error: "Something went wrong" });
     } finally {
       set({ isLoading: false });
@@ -60,6 +60,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
   addItem: async (input) => {
     set({ error: null });
+
     try {
       const res = await fetch("/api/items", {
         method: "POST",
@@ -78,11 +79,10 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       set((state) => ({ items: [payload.item, ...state.items] }));
       return payload.item;
     } catch (error) {
-      console.error("Error adding item:", error);
+      console.error("Error adding item: ", error);
       set({ error: "Something went wrong" });
     }
   },
-
   updateQuantity: async (id, quantity) => {
     const nextQuantity = Math.max(1, quantity);
     set({ error: null });
@@ -103,7 +103,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
         ),
       }));
     } catch (error) {
-      console.error("Error updating quantity:", error);
+      console.error("Error updating quantity: ", error);
       set({ error: "Something went wrong" });
     }
   },
@@ -114,6 +114,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
     const nextPurchased = !currentItem.purchased;
     set({ error: null });
+
     try {
       const res = await fetch(`/api/items/${id}`, {
         method: "PATCH",
@@ -130,7 +131,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
         ),
       }));
     } catch (error) {
-      console.error("Error toggling purchased:", error);
+      console.error("Error toggling purchased: ", error);
       set({ error: "Something went wrong" });
     }
   },
@@ -143,11 +144,9 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
 
-      set((state) => ({
-        items: state.items.filter((item) => item.id !== id),
-      }));
+      set((state) => ({ items: state.items.filter((item) => item.id !== id) }));
     } catch (error) {
-      console.error("Error removing item:", error);
+      console.error("Error removing item: ", error);
       set({ error: "Something went wrong" });
     }
   },
@@ -164,7 +163,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
 
       set({ items });
     } catch (error) {
-      console.error("Error clearing purchased:", error);
+      console.error("Error clearing purchased: ", error);
       set({ error: "Something went wrong" });
     }
   },
