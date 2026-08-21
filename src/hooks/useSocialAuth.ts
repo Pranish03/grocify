@@ -1,4 +1,5 @@
 import { useSSO } from "@clerk/expo";
+import * as AuthSession from "expo-auth-session";
 import { useState } from "react";
 import { Alert } from "react-native";
 
@@ -14,7 +15,10 @@ const useSocialAuth = () => {
     setLoadingStrategy(strategy);
 
     try {
-      const { createdSessionId, setActive } = await startSSOFlow({ strategy });
+      const { createdSessionId, setActive } = await startSSOFlow({
+        strategy,
+        redirectUrl: AuthSession.makeRedirectUri(),
+      });
 
       if (!createdSessionId || !setActive) {
         Alert.alert(
@@ -26,7 +30,7 @@ const useSocialAuth = () => {
 
       await setActive({ session: createdSessionId });
     } catch (error) {
-      console.log("Error in aocial auth: ", error);
+      console.log("Error in social auth: ", error);
       Alert.alert("Error", "Failed to sign in. please try again");
     } finally {
       setLoadingStrategy(null);
