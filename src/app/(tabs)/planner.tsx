@@ -3,8 +3,7 @@ import PlannerHeroImage from "@/components/planner/PlannerHeroImage";
 import TabScreenBackground from "@/components/TabScreenBackground";
 import { useGroceryStore } from "@/store/grocery-store";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { Text, View } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { ScrollView, Text, View } from "react-native";
 
 const cardShadow = {
   shadowColor: "#14532d",
@@ -54,8 +53,7 @@ const PlannerScreen = () => {
     <View className="flex-1 bg-green-50 pt-10">
       <TabScreenBackground />
 
-      <KeyboardAwareScrollView
-        bottomOffset={80}
+      <ScrollView
         contentContainerStyle={{ padding: 20, gap: 14 }}
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
@@ -119,7 +117,7 @@ const PlannerScreen = () => {
         <PlannerHeroImage />
 
         <PlannerFormCard />
-      </KeyboardAwareScrollView>
+      </ScrollView>
     </View>
   );
 };
