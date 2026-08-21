@@ -135,12 +135,37 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
     }
   },
 
-  removeItem: async () => {
+  removeItem: async (id) => {
+    set({ error: null });
+
     try {
-    } catch (error) {}
+      const res = await fetch(`/api/items/${id}`, { method: "DELETE" });
+
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+
+      set((state) => ({
+        items: state.items.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error("Error removing item:", error);
+      set({ error: "Something went wrong" });
+    }
   },
+
   clearPurchased: async () => {
+    set({ error: null });
+
     try {
-    } catch (error) {}
+      const res = await fetch("/api/items/clear-purchased", { method: "POST" });
+
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+
+      const items = get().items.filter((item) => !item.purchased);
+
+      set({ items });
+    } catch (error) {
+      console.error("Error clearing purchased:", error);
+      set({ error: "Something went wrong" });
+    }
   },
 }));
