@@ -3,6 +3,7 @@ import ListHeroCard from "@/components/list/ListHeroCard";
 import PendingItemCard from "@/components/list/PendingItemCard";
 import TabScreenBackground from "@/components/TabScreenBackground";
 import { useGroceryStore } from "@/store/grocery-store";
+import { FontAwesome6 } from "@expo/vector-icons";
 import { FlatList, Text, View } from "react-native";
 
 export default function ListScreen() {
@@ -11,7 +12,7 @@ export default function ListScreen() {
   const pendingItems = items.filter((item) => !item.purchased);
 
   return (
-    <View className="bg-green-50 pt-10">
+    <View className="bg-green-50 pt-10 flex-1">
       <TabScreenBackground />
 
       <FlatList
@@ -19,6 +20,7 @@ export default function ListScreen() {
         data={pendingItems}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <PendingItemCard item={item} />}
+        contentInsetAdjustmentBehavior="automatic"
         ListHeaderComponent={
           <View>
             <ListHeroCard />
@@ -33,35 +35,8 @@ export default function ListScreen() {
             </View>
           </View>
         }
-        ListFooterComponent={<CompletedItems />}
-      />
-    </View>
-  );
-}
 
-/* <ScrollView
-      className="flex-1 bg-green-50 p-[20px] pt-12"
-      showsVerticalScrollIndicator={false}
-    >
-      <TabScreenBackground />
-
-      <ListHeroCard />
-
-      <View className="flex-row items-center justify-between px-1 mt-5 mb-2">
-        <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
-          Shopping items
-        </Text>
-        <Text className="text-sm font-medium text-green-700">
-          {pendingItems.length} active
-        </Text>
-      </View>
-
-      <View className="mb-[64px]">
-        {pendingItems.length ? (
-          pendingItems.map((item) => (
-            <PendingItemCard key={item.id} item={item} />
-          ))
-        ) : (
+        ListEmptyComponent={
           <View className="items-center rounded-3xl border border-dashed border-green-800/20 bg-white/60 py-10 px-6">
             <View className="h-12 w-12 items-center justify-center rounded-full bg-green-100">
               <FontAwesome6 name="basket-shopping" size={18} color="#166534" />
@@ -73,8 +48,10 @@ export default function ListScreen() {
               Add items to start building your grocery run.
             </Text>
           </View>
-        )}
+        }
 
-        <CompletedItems />
-      </View>
-    </ScrollView> */
+        ListFooterComponent={<CompletedItems />}
+      />
+    </View>
+  );
+}
