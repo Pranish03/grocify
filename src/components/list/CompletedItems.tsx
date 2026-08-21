@@ -9,31 +9,41 @@ const CompletedItems = () => {
   if (!completedItems.length) return null;
 
   return (
-    <View className="mt-3 rounded-3xl border border-green-800/50 bg-green-100 p-4">
-      <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
-        Completed
-      </Text>
+    <View className="mt-3 rounded-3xl border border-green-800/10 bg-green-100/60 p-4">
+      <View className="flex-row items-center justify-between">
+        <Text className="text-sm font-semibold uppercase tracking-[1px] text-green-800">
+          Completed
+        </Text>
+        <Text className="text-xs font-semibold text-green-700">
+          {completedItems.length}
+        </Text>
+      </View>
 
       {completedItems.map((item) => (
         <View
           key={item.id}
-          className="mt-3 flex-row items-center justify-between rounded-2xl border border-green-800/50 bg-green-50 px-3 py-2"
+          className="mt-3 flex-row items-center justify-between rounded-2xl border border-green-800/10 bg-white px-3 py-2"
         >
-          <View className="flex-row items-center gap-2">
+          <View className="flex-1 flex-row items-center gap-2">
             <Pressable
               onPress={() => togglePurchased(item.id)}
-              className="h-6 w-6 items-center justify-center rounded-full bg-green-700"
+              className="h-6 w-6 items-center justify-center rounded-full bg-green-700 active:opacity-80"
+              hitSlop={4}
             >
               <FontAwesome6 name="check" size={12} color="#ffffff" />
             </Pressable>
-            <Text className="text-base text-green-900 line-through">
+            <Text
+              className="flex-1 text-base text-green-900/60 line-through"
+              numberOfLines={1}
+            >
               {item.name}
             </Text>
           </View>
 
           <Pressable
             onPress={() => removeItem(item.id)}
-            className="h-8 w-8 items-center justify-center rounded-xl bg-red-100"
+            className="h-8 w-8 items-center justify-center rounded-xl bg-red-50 active:bg-red-100"
+            hitSlop={4}
           >
             <FontAwesome6 name="trash" size={12} color="#d45f58" />
           </Pressable>
@@ -42,4 +52,5 @@ const CompletedItems = () => {
     </View>
   );
 };
+
 export default CompletedItems;

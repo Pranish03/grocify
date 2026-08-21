@@ -18,12 +18,22 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
   const { removeItem, updateQuantity, togglePurchased } = useGroceryStore();
 
   return (
-    <View className="rounded-3xl border border-green-800/50 bg-green-50 p-4 my-2">
+    <View
+      className="rounded-3xl border border-green-800/10 bg-white p-4 my-2"
+      style={{
+        shadowColor: "#14532d",
+        shadowOpacity: 0.06,
+        shadowRadius: 8,
+        shadowOffset: { width: 0, height: 3 },
+        elevation: 1,
+      }}
+    >
       <View className="flex-row items-start gap-3">
         <Pressable
-          className="mt-1 size-6 items-center justify-center rounded-full border-2 border-green-800/50 bg-green-50"
+          className="mt-1 size-6 items-center justify-center rounded-full border-2 border-green-800/30 active:bg-green-100"
           onPress={() => togglePurchased(item.id)}
-        ></Pressable>
+          hitSlop={8}
+        />
 
         <View className="flex-1">
           <View className="flex-row items-center justify-between gap-2">
@@ -42,8 +52,8 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
           </View>
 
           <View className="mt-2 flex-row items-center gap-2">
-            <View className="rounded-full bg-green-200 px-3 py-1">
-              <Text className="text-xs font-semibold text-green-600">
+            <View className="rounded-full bg-green-100 px-3 py-1">
+              <Text className="text-xs font-semibold text-green-700">
                 {item.category}
               </Text>
             </View>
@@ -51,10 +61,11 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
 
           <View className="mt-3 flex-row items-center gap-2">
             <Pressable
-              className="h-8 w-8 items-center justify-center rounded-xl border border-green-800/50 bg-green-100"
+              className="h-8 w-8 items-center justify-center rounded-xl border border-green-800/15 bg-green-50 active:bg-green-100"
               onPress={() =>
                 updateQuantity(item.id, Math.max(1, item.quantity - 1))
               }
+              hitSlop={4}
             >
               <FontAwesome6 name="minus" size={12} color="#3b5a4a" />
             </Pressable>
@@ -64,8 +75,9 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
             </Text>
 
             <Pressable
-              className="h-8 w-8 items-center justify-center rounded-xl border border-green-800/50 bg-green-100"
+              className="h-8 w-8 items-center justify-center rounded-xl border border-green-800/15 bg-green-50 active:bg-green-100"
               onPress={() => updateQuantity(item.id, item.quantity + 1)}
+              hitSlop={4}
             >
               <FontAwesome6 name="plus" size={12} color="#3b5a4a" />
             </Pressable>
@@ -73,8 +85,9 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
         </View>
 
         <Pressable
-          className="h-9 w-9 items-center justify-center rounded-xl bg-red-100"
+          className="h-9 w-9 items-center justify-center rounded-xl bg-red-50 active:bg-red-100"
           onPress={() => removeItem(item.id)}
+          hitSlop={4}
         >
           <FontAwesome6 name="trash" size={13} color="#d45f58" />
         </Pressable>
