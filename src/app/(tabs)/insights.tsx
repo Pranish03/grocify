@@ -1,16 +1,33 @@
-import { useClerk } from "@clerk/expo";
-import { Pressable, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import ClearCompletedButton from "@/components/insights/ClearCompletedButton";
+import InsightsCategorySection from "@/components/insights/InsightsCategorySection";
+import InsightsPrioritySection from "@/components/insights/InsightsPrioritySection";
+import InsightsStatsSection from "@/components/insights/InsightsStatsSection";
+import SentryFeedbackButton from "@/components/insights/SentryFeedbackButton";
+import UserProfile from "@/components/insights/UserProfile";
+import TabScreenBackground from "@/components/TabScreenBackground";
+import { ScrollView } from "react-native";
 
-export default function InsightsScreen() {
-  const { signOut } = useClerk();
-
+const InsightsScreen = () => {
   return (
-    <SafeAreaView>
-      <Text>Insights Screen</Text>
-      <Pressable onPress={() => signOut()}>
-        <Text>Sign Out</Text>
-      </Pressable>
-    </SafeAreaView>
+    <>
+      <ScrollView
+        className="flex-1 bg-green-50"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ padding: 20, paddingTop: 48, gap: 14 }}
+        contentInsetAdjustmentBehavior="automatic"
+      >
+        <TabScreenBackground />
+
+        <UserProfile />
+        <InsightsStatsSection />
+        <InsightsCategorySection />
+        <InsightsPrioritySection />
+        <ClearCompletedButton />
+      </ScrollView>
+
+      <SentryFeedbackButton />
+    </>
   );
-}
+};
+
+export default InsightsScreen;
